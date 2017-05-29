@@ -12,6 +12,7 @@ const imports = {
 }
 
 // Here is where you keep your styles. An added benefit is that you can make this modular, and customise designs elsewhere.
+// As you can see, it's still familiar.
 const defaultStyle = {
     '*': {
         'padding': 0,
@@ -34,7 +35,12 @@ const defaultStyle = {
     'header>div>*': {
         'display': 'inline-block',
         'margin-left': "20px",
-    }
+    },
+    '@media only screen and (min-width: 500px)': {
+        'header': {
+            'background-color': "#354",
+        },
+    },
     
 };
 
@@ -49,9 +55,24 @@ for(var i in imports) {
 
 // Apply styles located in defaultStyle
 for(var i in defaultStyle) {
-    stringToOutput += i + "{";
-    for (var key in defaultStyle[i]) {
-        stringToOutput += key + ":" + defaultStyle[i][key] + ";";
+    // Regular Query
+    if (i.search("@media") != 0) {
+        stringToOutput += i + "{";
+        for (var key in defaultStyle[i]) {
+            stringToOutput += key + ":" + defaultStyle[i][key] + ";";
+            console.log(key + ":" + defaultStyle[i][key] + ";");
+        }
+    } else {
+        // Media Query
+        for (var key in defaultStyle[i]) {
+            if (i.search("@media") == 0) {
+                stringToOutput += i + "{" + key + "{";
+                for (var key2 in defaultStyle[i][key]) {
+                    stringToOutput += key2 + ":" + defaultStyle[i][key][key2] + ";";
+                }
+                stringToOutput += "}}";
+            }
+        }  
     }
     stringToOutput += "}";
 };
