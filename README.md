@@ -1,6 +1,10 @@
 # JS-CSS
 Write CSS using JavaScript without a framework.
 
+### What can it do?
+JS-CSS currently supports all methods and selectors, as well as media queries (new).
+If you do require anything else, it's always possible to overwrite using a CSS file.
+
 ### Why?
 There are a few reasons I can think of.
 1. Modularity - You can customise elements outside of the CSS area, and reuse those parts in other areas.
